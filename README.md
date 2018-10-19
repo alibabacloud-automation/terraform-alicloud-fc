@@ -47,6 +47,33 @@ You can use this in your terraform template with the following steps.
     - ALICLOUD_SECRET_KEY
     - ALICLOUD_REGION
 
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|:----:|:-----:|:-----:|
+| service | The FC service name | string | - | yes |
+| function | The FC function name | string | - | yes |
+| filename | The path to the function's deployment package within the local filesystem. It is conflict with the oss_-prefixed options | string | - | yes |
+| memory_size | Amount of memory in MB your Function can use at runtime. Defaults to 128. Limits to [128, 3072] | int | 512 | no |
+| runtime | The FC function runtime type | string | - | yes |
+| handler | The FC function entry point in your code | string | - | yes |
+| timeout | The amount of time your Function has to run in seconds | int | 60 | no |
+| trigger | The FC trigger name | string | - | yes |
+| type | The Type of the trigger. Valid values: ["oss", "log\", "timer", "http"] | string | - | yes |
+| config | The config of FC trigger | string | - | no |
+
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| this_service_id | The ID of the Service |
+| this_service_name | The name of the Service |
+| this_function_id | The ID of the Function |
+| this_function_name | The name of the Function |
+| this_trigger_id | The ID of the Trigger |
+| this_trigger_name | The name of the Trigger |
+
 
 Authors
 -------

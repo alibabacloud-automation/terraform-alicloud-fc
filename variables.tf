@@ -8,11 +8,6 @@ variable "function" {
   description = "The FC function name."
 }
 
-variable "description" {
-  description = "The FC function description."
-  default     = ""
-}
-
 variable "filename" {
   description = "The path to the function's deployment package within the local filesystem. It is conflict with the oss_-prefixed options."
 }
