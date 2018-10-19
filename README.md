@@ -15,6 +15,8 @@ Root module calls these modules which can also be used separately to create inde
 * [function](https://github.com/terraform-alicloud-modules/terraform-alicloud-fc/tree/master/modules/function) - creates Function
 * [trigger](https://github.com/terraform-alicloud-modules/terraform-alicloud-fc/tree/master/modules/trigger) - creates Trigger
 
+----------------------
+
 Usage
 -----
 You can use this in your terraform template with the following steps.
