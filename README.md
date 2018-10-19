@@ -1,4 +1,5 @@
-Alicloud Function Compute (FC) Terraform Module
+Alicloud Function Compute (FC) Terraform Module  
+terraform-alicloud-fc
 =============================================
 
 Terraform module which creates FC resources on Alibaba Cloud.
