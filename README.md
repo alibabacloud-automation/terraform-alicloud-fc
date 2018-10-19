@@ -25,24 +25,26 @@ You can use this in your terraform template with the following steps.
 1. Adding a module resource to your template, e.g. main.tf
 
 
-         module "tf-fc" {
-            source = "terraform-alicloud-modules/alibaba/fc/alicloud"
+    ```
+    module "tf-fc" {
+        source   = "terraform-alicloud-modules/alibaba/fc/alicloud"
 
-            service = "tf-module-service"
-            function = "tr-module-function"
-            filename = "./hello.zip"
-            runtime = "python2.7"
-            handler = "hello.handler"
-            trigger = "tf-module-trigger"
-            type = "http"
-            config = <<EOF
-            {
+        service  = "tf-module-service"
+        function = "tr-module-function"
+        filename = "./hello.zip"
+        runtime  = "python2.7"
+        handler  = "hello.handler"
+        trigger  = "tf-module-trigger"
+        type     = "http"
+        config   = <<EOF
+        {
             "authType" : "anonymous",
             "methods" : ["GET", "POST"]
-            }
-            EOF
+        }
+        EOF
 
-         }
+    }
+    ```
 
 2. Setting values for the following variables through environment variables:
 
