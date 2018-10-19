@@ -23,7 +23,7 @@ You can use this in your terraform template with the following steps.
 
 
          module "tf-fc" {
-            source = "alibaba/fc/alicloud"
+            source = "terraform-alicloud-modules/alibaba/fc/alicloud"
 
             service = "tf-module-service"
             function = "tr-module-function"
@@ -45,6 +45,7 @@ You can use this in your terraform template with the following steps.
 
     - ALICLOUD_ACCESS_KEY
     - ALICLOUD_SECRET_KEY
+    - ALICLOUD_REGION
 
 
 Authors
