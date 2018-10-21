@@ -27,7 +27,7 @@ You can use this in your terraform template with the following steps.
 
     ```
     module "tf-fc" {
-        source   = "terraform-alicloud-modules/alibaba/fc/alicloud"
+        source   = "terraform-alicloud-modules/fc/alicloud"
 
         service  = "tf-module-service"
         function = "tr-module-function"
@@ -36,13 +36,7 @@ You can use this in your terraform template with the following steps.
         handler  = "hello.handler"
         trigger  = "tf-module-trigger"
         type     = "http"
-        config   = <<EOF
-        {
-            "authType" : "anonymous",
-            "methods" : ["GET", "POST"]
-        }
-        EOF
-
+        config   = "{\"authType\" : \"anonymous\",\"methods\" : [\"GET\", \"POST\"]}"
     }
     ```
 
