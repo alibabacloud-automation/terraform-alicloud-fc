@@ -35,3 +35,4 @@ variable "timeout" {
   description = "The amount of time your Function has to run in seconds."
   default     = 60
 }
+

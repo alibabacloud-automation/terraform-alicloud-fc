@@ -30,3 +30,4 @@ variable "config" {
   description = "The config of FC trigger."
   default     = ""
 }
+
