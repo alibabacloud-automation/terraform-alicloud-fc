@@ -1,5 +1,10 @@
 # FC variables
 
+variable "region" {
+  description = "The region used to launch this module resources."
+  default     = ""
+}
+
 variable "service" {
   description = "The FC service name."
 }
@@ -42,3 +47,4 @@ variable "config" {
   description = "The config of FC trigger."
   default     = ""
 }
+

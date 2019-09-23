@@ -1,10 +1,16 @@
+provider "alicloud" {
+  version              = ">=1.56.0"
+  region               = var.region != "" ? var.region : null
+  configuration_source = "terraform-alicloud-modules/fc"
+}
+
 ######
 # FC Service
 ######
 module "fc_service" {
   source = "./modules/service"
 
-  name = "${var.service}"
+  name = var.service
 }
 
 #################
@@ -13,13 +19,13 @@ module "fc_service" {
 module "fc_function" {
   source = "./modules/function"
 
-  service     = "${module.fc_service.name}"
-  name        = "${var.function}"
-  filename    = "${var.filename}"
-  memory_size = "${var.memory_size}"
-  runtime     = "${var.runtime}"
-  handler     = "${var.handler}"
-  timeout     = "${var.timeout}"
+  service     = module.fc_service.name
+  name        = var.function
+  filename    = var.filename
+  memory_size = var.memory_size
+  runtime     = var.runtime
+  handler     = var.handler
+  timeout     = var.timeout
 }
 
 #################
@@ -28,9 +34,10 @@ module "fc_function" {
 module "fc_trigger" {
   source = "./modules/trigger"
 
-  service  = "${module.fc_service.name}"
-  function = "${module.fc_function.name}"
-  name     = "${var.trigger}"
-  type     = "${var.type}"
-  config   = "${var.config}"
+  service  = module.fc_service.name
+  function = module.fc_function.name
+  name     = var.trigger
+  type     = var.type
+  config   = var.config
 }
+
