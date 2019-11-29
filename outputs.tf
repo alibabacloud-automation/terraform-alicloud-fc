@@ -1,30 +1,41 @@
+
 output "this_service_id" {
-  description = "The ID of the Service"
-  value       = module.fc_service.id
+  value = length(alicloud_fc_service.this) > 0 ? alicloud_fc_service.this.0.id : ""
 }
 
 output "this_service_name" {
-  description = "The name of the Service"
-  value       = module.fc_service.name
+  value = local.service_name
 }
 
-output "this_function_id" {
-  description = "The ID of the Function"
-  value       = module.fc_function.id
+output "this_http_function_id" {
+  value = length(alicloud_fc_function.http) > 0 ? alicloud_fc_function.http.0.id : ""
 }
 
-output "this_function_name" {
-  description = "The name of the Function"
-  value       = module.fc_function.name
+output "this_http_function_name" {
+  value = length(alicloud_fc_function.http) > 0 ? alicloud_fc_function.http.0.name : ""
 }
 
-output "this_trigger_id" {
-  description = "The ID of the Trigger"
-  value       = module.fc_trigger.id
+output "this_http_trigger_ids" {
+  value = alicloud_fc_trigger.http.*.id
 }
 
-output "this_trigger_name" {
-  description = "The name of the Trigger"
-  value       = module.fc_trigger.name
+output "this_http_trigger_names" {
+  value = alicloud_fc_trigger.http.*.name
+}
+
+output "this_events_function_id" {
+  value = length(alicloud_fc_function.events) > 0 ? alicloud_fc_function.events.0.id : ""
+}
+
+output "this_events_function_name" {
+  value = length(alicloud_fc_function.events) > 0 ? alicloud_fc_function.events.0.name : ""
+}
+
+output "this_events_trigger_ids" {
+  value = alicloud_fc_trigger.event.*.id
+}
+
+output "this_events_trigger_names" {
+  value = alicloud_fc_trigger.event.*.name
 }
 
