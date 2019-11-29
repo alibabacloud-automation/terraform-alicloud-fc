@@ -1,4 +1,4 @@
-## 1.2.0 (November 27, 2019)
+## 1.2.0 (November 29, 2019)
 
 - **Added:** `examples` [GH-6](https://github.com/terraform-alicloud-modules/terraform-alicloud-fc/pull/6)
 
