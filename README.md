@@ -290,7 +290,7 @@ This moudle can create FC Function and Triggers using a existing FC Service.
 
 Authors
 -------
-Created and maintained by Kevin(@muxiangqiu muxiangqiu@gmail.com)
+Created and maintained by Alibaba Cloud Terraform Team(terraform@alibabacloud.com).
 
 Reference
 ---------
