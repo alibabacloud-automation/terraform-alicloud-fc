@@ -1,6 +1,5 @@
 Alicloud Function Compute (FC) Terraform Module  
 terraform-alicloud-fc
-=============================================
 
 Terraform module which creates FC resources on Alibaba Cloud.
 
@@ -287,10 +286,82 @@ This moudle can create FC Function and Triggers using a existing FC Service.
 | this_events_trigger_ids | The IDs of the events Triggers |
 | this_events_trigger_names | The names of the events Triggers |
 
+## Notes
+From the version v1.3.0, the module has removed the following `provider` setting:
+
+```hcl
+provider "alicloud" {
+   version                 = ">=1.56.0"
+   profile                 = var.profile != "" ? var.profile : null
+   shared_credentials_file = var.shared_credentials_file != "" ? var.shared_credentials_file : null
+   region                  = var.region != "" ? var.region : null
+   skip_region_validation  = var.skip_region_validation
+   configuration_source    = "terraform-alicloud-modules/fc"
+}
+```
+
+If you still want to use the `provider` setting to apply this module, you can specify a supported version, like 1.2.0:
+
+```hcl
+module "tf-fc" {
+   source               = "terraform-alicloud-modules/fc/alicloud"
+   version              = "1.2.0"
+   region               = "cn-beijing"
+   profile              = "Your-Profile-Name"
+   service_name         = "production-triggers"
+   create_http_function = true
+   // ...
+}
+```
+
+If you want to upgrade the module to 1.3.0 or higher in-place, you can define a provider which same region with
+previous region:
+
+```hcl
+provider "alicloud" {
+  region  = "cn-beijing"
+  profile = "Your-Profile-Name"
+}
+module "tf-fc" {
+   source               = "terraform-alicloud-modules/fc/alicloud"
+   service_name         = "production-triggers"
+   create_http_function = true
+  // ...
+}
+```
+or specify an alias provider with a defined region to the module using `providers`:
+
+```hcl
+provider "alicloud" {
+  region  = "cn-beijing"
+  profile = "Your-Profile-Name"
+  alias   = "bj"
+}
+module "tf-fc" {
+   source               = "terraform-alicloud-modules/fc/alicloud"
+   providers            = {
+      alicloud = alicloud.bj
+   }
+   service_name         = "production-triggers"
+   create_http_function = true
+   // ...
+}
+```
+
+and then run `terraform init` and `terraform apply` to make the defined provider effect to the existing module state.
+
+More details see [How to use provider in the module](https://www.terraform.io/docs/language/modules/develop/providers.html#passing-providers-explicitly)
+
+## Terraform versions
+
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.12.0 |
+| <a name="requirement_alicloud"></a> [alicloud](#requirement\_alicloud) | >= 1.56.0 |
 
 Authors
 -------
-Created and maintained by Kevin(@muxiangqiu muxiangqiu@gmail.com)
+Created and maintained by Alibaba Cloud Terraform Team(terraform@alibabacloud.com)
 
 Reference
 ---------
