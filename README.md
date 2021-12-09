@@ -227,10 +227,6 @@ This moudle can create FC Function and Triggers using a existing FC Service.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| region | The region used to launch this module resources | string | "" | no |
-| profile | The profile name as set in the shared credentials file. If not set, it will be sourced from the ALICLOUD_PROFILE environment variable | string | "" | no |
-| shared_credentials_file | This is the path to the shared credentials file. If this is not set and a profile is specified, $HOME/.aliyun/config.json will be used | string | "" | no |
-| skip_region_validation | Skip static validation of region ID. Used by users of alternative AlibabaCloud-like APIs or users w/ access to regions that are not public (yet) | bool | false | no |
 | create_service | Whether to create a new FC service. Default to true. | bool | true | no |
 | filter_service_with_name_regex | A regex string to filter results by FC service name. | string | "" | no |
 | service_name | The FC service name | string | "terraform-fc-service" | no |
