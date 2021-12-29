@@ -36,7 +36,7 @@ variable "filter_service_with_name_regex" {
 
 variable "service_name" {
   description = "The FC service name."
-  default     = "terraform-fc-service"
+  default     = ""
 }
 
 variable "service_internet_access" {
@@ -139,9 +139,21 @@ variable "create_event_function" {
   default     = false
 }
 
+variable "description" {
+  description = "The Function Compute function description."
+  type        = string
+  default     = ""
+}
+
+variable "event_description" {
+  description = "The Function function description."
+  type        = string
+  default     = ""
+}
+
 variable "events_function_name" {
   description = "The FC events function name."
-  default     = "terraform-fc-events-function"
+  default     = ""
 }
 
 variable "events_function_filename" {
@@ -168,7 +180,6 @@ variable "events_function_handler" {
   description = "The FC function entry point in your code."
   default     = "index.handler"
 }
-
 
 #################
 # FC Trigger Variables

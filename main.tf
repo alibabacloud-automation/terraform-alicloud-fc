@@ -5,7 +5,7 @@
 resource "alicloud_fc_service" "this" {
   count           = var.create_service ? 1 : 0
   name            = local.random_name
-  description     = "This is a fc service created by terraform"
+  description     = var.description
   internet_access = var.service_internet_access
   role            = local.service_role
   dynamic "log_config" {
@@ -47,7 +47,7 @@ resource "alicloud_fc_function" "events" {
   count       = var.create_event_function ? 1 : 0
   service     = local.service_name
   name        = var.events_function_name
-  description = "This is an fc events function created by terraform"
+  description = var.event_description
   filename    = var.events_function_filename == "" ? null : var.events_function_filename
   oss_bucket  = var.events_function_oss_bucket == "" ? null : var.events_function_oss_bucket
   oss_key     = var.events_function_oss_key == "" ? null : var.events_function_oss_key
@@ -57,6 +57,3 @@ resource "alicloud_fc_function" "events" {
   timeout     = var.function_timeout
   depends_on  = [alicloud_fc_service.this]
 }
-
-
-
