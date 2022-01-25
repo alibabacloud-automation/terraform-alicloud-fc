@@ -1,4 +1,5 @@
-data "alicloud_account" "this" {}
+data "alicloud_account" "this" {
+}
 
 resource "alicloud_ram_role" "this" {
   name        = "terraform-fc-module-trigger"
@@ -50,4 +51,3 @@ module "cdn-trigger" {
     },
   ]
 }
-

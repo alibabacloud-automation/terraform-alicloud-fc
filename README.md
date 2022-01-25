@@ -52,6 +52,7 @@ You can use this in your terraform template with the following steps.
 This moudle can create FC Function and Triggers using a existing FC Service.
 
 1. To create http function and triggers, but not create service:
+   
     ```hcl
     create_service                 = false
     filter_service_with_name_regex = "existing-service-name-regex"
@@ -63,8 +64,9 @@ This moudle can create FC Function and Triggers using a existing FC Service.
       }
     ]
     ```
-
+   
 1. To create service, events function and triggers:
+   
     ```hcl
     create_service        = true
     create_event_function = true
@@ -75,8 +77,9 @@ This moudle can create FC Function and Triggers using a existing FC Service.
       }
     ]
     ```
-
+   
 1. Create both http and event functions and retrieve the existing role by name regex, you can also retrieve role by policy name and policy type:
+   
     ```hcl
     create_event_function    = true
     create_http_function     = true
@@ -87,6 +90,7 @@ This moudle can create FC Function and Triggers using a existing FC Service.
     ```
 
 1. Create several event triggers:
+   
     ```hcl
     create_service        = true
     create_event_function = true
@@ -102,8 +106,9 @@ This moudle can create FC Function and Triggers using a existing FC Service.
       }
     ] 
     ```
-
+   
 1. Create several event triggers and use different roles:
+   
     ```hcl
     create_service        = true
     create_event_function = true
@@ -122,6 +127,7 @@ This moudle can create FC Function and Triggers using a existing FC Service.
     ```
     
 1. Create functions but not triggers:
+   
     ```hcl
     create_service        = true
     create_event_function = true
@@ -131,7 +137,8 @@ This moudle can create FC Function and Triggers using a existing FC Service.
 ## Examples of triggers
 
 1. [HTTP trigger](https://github.com/terraform-alicloud-modules/terraform-alicloud-fc/tree/master/examples/http-trigger):
-    ```hcl
+    
+   ```hcl
     create_http_function = true
     http_triggers = [
       {
@@ -142,7 +149,8 @@ This moudle can create FC Function and Triggers using a existing FC Service.
     ```
     
 1. [ApiGatway trigger](https://github.com/terraform-alicloud-modules/terraform-alicloud-fc/tree/master/examples/api-trigger):
-    ```hcl
+    
+   ```hcl
     module "apigateway-trigger" {
       # omitted for brevity
       create_event_function    = true
@@ -159,11 +167,11 @@ This moudle can create FC Function and Triggers using a existing FC Service.
         timeout       = 10
       }
     }
- 
     ```
     
 1. [CDN trigger](https://github.com/terraform-alicloud-modules/terraform-alicloud-fc/tree/master/examples/cdn-trigger):
-    ```hcl
+    
+   ```hcl
     create_event_function = true
     events_triggers = [
       {
@@ -175,7 +183,8 @@ This moudle can create FC Function and Triggers using a existing FC Service.
     ```
     
 1. [Log trigger](https://github.com/terraform-alicloud-modules/terraform-alicloud-fc/tree/master/examples/log-trigger):
-    ```hcl
+    
+   ```hcl
     create_event_function = true
     events_triggers = [
       {
@@ -187,7 +196,8 @@ This moudle can create FC Function and Triggers using a existing FC Service.
     ```
     
 1. [Mns trigger](https://github.com/terraform-alicloud-modules/terraform-alicloud-fc/tree/master/examples/mns-trigger):
-    ```hcl
+    
+   ```hcl
     create_event_function = true
     events_triggers = [
       {
@@ -199,6 +209,7 @@ This moudle can create FC Function and Triggers using a existing FC Service.
     ```
     
 1. [Oss trigger](https://github.com/terraform-alicloud-modules/terraform-alicloud-fc/tree/master/examples/oss-trigger):
+   
     ```hcl
     create_event_function = true
     events_triggers = [
@@ -211,7 +222,8 @@ This moudle can create FC Function and Triggers using a existing FC Service.
     ```
     
 1. [Timer trigger](https://github.com/terraform-alicloud-modules/terraform-alicloud-fc/tree/master/examples/timer-trigger):
-    ```hcl
+    
+   ```hcl
     create_event_function = true
     events_triggers = [
       {
@@ -220,8 +232,6 @@ This moudle can create FC Function and Triggers using a existing FC Service.
       },
     ]
     ```
-
-
 
 ## Inputs
 
@@ -265,7 +275,6 @@ This moudle can create FC Function and Triggers using a existing FC Service.
 | http_triggers | List trigger fields to create http triggers | list(map(string)) | [] | no |
 | events_trigger_name | The FC events trigger default name. | string | "terraform-events-trigger" | no |
 | events_triggers | List trigger fields to create events triggers | list(map(string)) | [] | no |
-
 
 ## Outputs
 
@@ -352,7 +361,7 @@ More details see [How to use provider in the module](https://www.terraform.io/do
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.12.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13.0 |
 | <a name="requirement_alicloud"></a> [alicloud](#requirement\_alicloud) | >= 1.56.0 |
 
 Authors

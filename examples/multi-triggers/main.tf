@@ -1,4 +1,5 @@
-data "alicloud_account" "this" {}
+data "alicloud_account" "this" {
+}
 
 data "alicloud_regions" "this" {
   current = true
@@ -31,12 +32,12 @@ resource "alicloud_mns_topic" "this" {
 }
 
 module "multi-triggers" {
-  source                     = "../.."
-  service_name               = "multi-triggers"
-  create_event_function      = true
+  source                   = "../.."
+  service_name             = "multi-triggers"
+  create_event_function    = true
   events_function_filename = "../events_function.py"
-  events_function_runtime    = "python3"
-  trigger_role               = alicloud_ram_role.this.arn
+  events_function_runtime  = "python3"
+  trigger_role             = alicloud_ram_role.this.arn
   events_triggers = [
     {
       type       = "mns_topic"
@@ -58,4 +59,3 @@ module "multi-triggers" {
     }
   ]
 }
-

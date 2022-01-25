@@ -1,4 +1,3 @@
-
 output "this_service_id" {
   value = length(alicloud_fc_service.this) > 0 ? alicloud_fc_service.this.0.id : ""
 }
@@ -38,4 +37,3 @@ output "this_events_trigger_ids" {
 output "this_events_trigger_names" {
   value = alicloud_fc_trigger.event.*.name
 }
-

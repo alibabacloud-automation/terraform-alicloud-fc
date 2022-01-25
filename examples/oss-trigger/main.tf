@@ -1,4 +1,5 @@
-data "alicloud_account" "this" {}
+data "alicloud_account" "this" {
+}
 
 data "alicloud_regions" "this" {
   current = true
@@ -56,4 +57,3 @@ module "oss-trigger" {
     },
   ]
 }
-
