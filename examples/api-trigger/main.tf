@@ -32,7 +32,6 @@ module "apigateway-trigger" {
   events_function_runtime  = "nodejs8"
 }
 
-
 resource "alicloud_api_gateway_group" "this" {
   name        = "terraform_fc_module"
   description = "created by terraform-fc-module"
@@ -77,4 +76,3 @@ resource "alicloud_api_gateway_api" "apiGatewayApi" {
     "TEST",
   ]
 }
-

@@ -34,4 +34,3 @@ module "timer-trigger" {
     },
   ]
 }
-

@@ -1,8 +1,4 @@
-
-#################
 # FC Trigger
-#################
-
 resource "alicloud_fc_trigger" "http" {
   count      = var.create_http_function ? length(var.http_triggers) : 0
   service    = local.service_name
