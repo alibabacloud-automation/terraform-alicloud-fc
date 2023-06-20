@@ -5,7 +5,7 @@ locals {
 		"eventVersion": "1.0.0",
 		"notes": "cdn events trigger",
 		"filter": {
-			"domain": ["${alicloud_cdn_domain_new.this.domain_name}"]
+			"domain": ["${alicloud_cdn_domain_new.default.domain_name}"]
 		}
 	}
   EOF

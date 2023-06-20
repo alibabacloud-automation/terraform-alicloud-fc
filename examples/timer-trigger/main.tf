@@ -1,5 +1,9 @@
-resource "alicloud_ram_role" "this" {
-  name        = "terraform-fc-module-trigger"
+resource "random_integer" "default" {
+  max = 99999
+  min = 10000
+}
+resource "alicloud_ram_role" "default" {
+  name        = "tf-example-${random_integer.default.result}"
   document    = <<EOF
   {
     "Statement": [
@@ -16,7 +20,7 @@ resource "alicloud_ram_role" "this" {
     "Version": "1"
   }
   EOF
-  description = "this is a test"
+  description = "this is a example"
   force       = true
 }
 
@@ -24,9 +28,12 @@ module "timer-trigger" {
   source                   = "../.."
   service_name             = "timer-trigger"
   create_event_function    = true
+  events_function_name     = "tf-example-event-${random_integer.default.result}"
+  service_role             = alicloud_ram_role.default.arn
+  events_function_handler  = "index.handler"
   events_function_filename = "../events_function.py"
   events_function_runtime  = "python3"
-  trigger_role             = alicloud_ram_role.this.arn
+  trigger_role             = alicloud_ram_role.default.arn
   events_triggers = [
     {
       type   = "timer"

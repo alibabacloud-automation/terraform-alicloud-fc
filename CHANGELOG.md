@@ -1,4 +1,9 @@
-## 1.4.0 (Unreleased)
+## 1.3.1 (July 7, 2023)
+
+IMPROVEMENTS:
+
+- Improves the module example [GH-12](https://github.com/terraform-alicloud-modules/terraform-alicloud-fc/pull/12)
+
 ## 1.3.0 (December 10, 2021)
 
 ENHANCEMENTS:

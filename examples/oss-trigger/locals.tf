@@ -8,7 +8,7 @@ locals {
 		"filter": {
 			"key": {
                 "prefix": "source/",
-                "suffix": ".png"
+                "suffix": ".py"
 			}
 		}
 	}
