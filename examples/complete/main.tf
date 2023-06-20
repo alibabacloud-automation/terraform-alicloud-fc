@@ -1,3 +1,7 @@
+resource "random_integer" "default" {
+  max = 99999
+  min = 10000
+}
 data "alicloud_fc_zones" "default" {
 }
 
@@ -9,7 +13,7 @@ data "alicloud_regions" "this" {
 }
 
 resource "alicloud_ram_role" "default" {
-  name     = "tf-testacc-ram-role"
+  name     = "tf-example-${random_integer.default.result}"
   document = var.document
   force    = var.force
 }
@@ -21,7 +25,7 @@ resource "alicloud_ram_role_policy_attachment" "default" {
 }
 
 resource "alicloud_mns_topic" "default" {
-  name = "tf-testacc-mns-topic"
+  name = "tf-example-${random_integer.default.result}"
 }
 
 module "vpc" {
@@ -39,8 +43,8 @@ module "security_group" {
 
 module "sls" {
   source       = "terraform-alicloud-modules/sls/alicloud"
-  project_name = "tf-testacc-project"
-  store_name   = "tf-testacc-store"
+  project_name = "tf-example-${random_integer.default.result}"
+  store_name   = "tf-example-${random_integer.default.result}"
 }
 
 module "fc_service" {
@@ -49,7 +53,7 @@ module "fc_service" {
   #alicloud_fc_service
   create_service = true
 
-  service_name            = "tf-testacc-fc-service"
+  service_name            = "tf-example-${random_integer.default.result}"
   fc_service_description  = var.fc_service_description
   service_internet_access = var.service_internet_access
   service_role            = alicloud_ram_role.default.arn
@@ -70,7 +74,7 @@ module "fc_service" {
   #alicloud_fc_function
   create_http_function = true
 
-  http_function_name           = "tf-testacc-fc-http"
+  http_function_name           = "tf-example-http-${random_integer.default.result}"
   fc_function_http_description = var.fc_function_http_description
   http_function_filename       = "../http_function.py"
   http_function_runtime        = var.http_function_runtime
@@ -80,21 +84,21 @@ module "fc_service" {
 
   create_event_function = true
 
-  events_function_name           = "tf-testacc-fc-events"
+  events_function_name           = "tf-example-event-${random_integer.default.result}"
   fc_function_events_description = var.fc_function_events_description
   events_function_filename       = "../events_function.py"
   events_function_runtime        = var.events_function_runtime
   events_function_handler        = var.events_function_handler
 
   #alicloud_fc_trigger
-  http_trigger_name = "tf-testacc-fc-http-trigger"
+  http_trigger_name = "tf-example-${random_integer.default.result}"
   http_triggers = [
     {
       type   = "http"
       config = var.http_config
     }
   ]
-  events_trigger_name = "tf-testacc-fc-events-trigger"
+  events_trigger_name = "tf-example-${random_integer.default.result}"
   trigger_role        = alicloud_ram_role.default.arn
   events_triggers = [
     {

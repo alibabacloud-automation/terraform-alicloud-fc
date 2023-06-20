@@ -2,7 +2,7 @@ locals {
   log_trigger_conf = <<EOF
   {
         "sourceConfig": {
-            "logstore": "${alicloud_log_store.this.name}"
+            "logstore": "${alicloud_log_store.default.name}"
         },
         "jobConfig": {
             "maxRetryTime": 3,
@@ -13,8 +13,8 @@ locals {
             "c": "d"
         },
         "logConfig": {
-            "project": "${alicloud_log_project.this.name}",
-            "logstore": "${alicloud_log_store.this1.name}"
+            "project": "${alicloud_log_project.default.name}",
+            "logstore": "${alicloud_log_store.default2.name}"
         },
         "enable": true
     }

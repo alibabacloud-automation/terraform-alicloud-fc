@@ -1,9 +1,13 @@
-data "alicloud_regions" "this" {
+resource "random_integer" "default" {
+  max = 99999
+  min = 10000
+}
+data "alicloud_regions" "default" {
   current = true
 }
 
-resource "alicloud_ram_role" "this" {
-  name        = "terraform-fc-module-trigger"
+resource "alicloud_ram_role" "default" {
+  name        = "tf-example-${random_integer.default.result}"
   document    = <<EOF
   {
     "Statement": [
@@ -20,33 +24,36 @@ resource "alicloud_ram_role" "this" {
     "Version": "1"
   }
   EOF
-  description = "this is a test"
+  description = "this is a example"
   force       = true
 }
 
 module "apigateway-trigger" {
   source                   = "../.."
-  service_name             = "apigateway-trigger"
+  service_name             = "tf-example-${random_integer.default.result}"
   create_event_function    = true
+  events_function_name     = "tf-example-event-${random_integer.default.result}"
+  service_role             = alicloud_ram_role.default.arn
+  events_function_handler  = "index.handler"
   events_function_filename = "../events_function.js"
   events_function_runtime  = "nodejs8"
 }
 
-resource "alicloud_api_gateway_group" "this" {
-  name        = "terraform_fc_module"
+resource "alicloud_api_gateway_group" "default" {
+  name        = "tf-example-${random_integer.default.result}"
   description = "created by terraform-fc-module"
 }
 
-resource "alicloud_api_gateway_api" "apiGatewayApi" {
-  name        = "terraform_fc_module"
-  group_id    = alicloud_api_gateway_group.this.id
+resource "alicloud_api_gateway_api" "default" {
+  name        = "tf-example-${random_integer.default.result}"
+  group_id    = alicloud_api_gateway_group.default.id
   description = "create by terraform-fc-module"
   auth_type   = "APP"
 
   request_config {
     protocol    = "HTTP"
     method      = "POST"
-    path        = "/test/path2"
+    path        = "/example/path2"
     mode        = "MAPPING"
     body_format = "STREAM"
   }
@@ -54,10 +61,10 @@ resource "alicloud_api_gateway_api" "apiGatewayApi" {
   service_type = "FunctionCompute"
 
   fc_service_config {
-    region        = data.alicloud_regions.this.id
+    region        = data.alicloud_regions.default.id
     function_name = module.apigateway-trigger.this_events_function_name
     service_name  = module.apigateway-trigger.this_service_name
-    arn_role      = alicloud_ram_role.this.arn
+    arn_role      = alicloud_ram_role.default.arn
     timeout       = 10
   }
 

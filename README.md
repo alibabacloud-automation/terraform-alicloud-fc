@@ -27,14 +27,21 @@ You can use this in your terraform template with the following steps.
     module "tf-fc" {
       source = "terraform-alicloud-modules/fc/alicloud"
       
-      service_name           = "production-triggers"
+      service_name           = "tf-example"
       create_http_function   = true
+      http_function_name     = "tf-example"
+      http_function_handler  = "http.handler"
       http_function_filename = "../http_function.py"
       http_function_runtime  = "python3"
       http_triggers = [
         {
           type   = "http"
-          config = local.http_trigger_conf
+          config = <<EOF
+            {
+              "authType": "anonymous",
+              "methods": ["GET", "POST"]
+            }
+            EOF
         }
       ]
     }
