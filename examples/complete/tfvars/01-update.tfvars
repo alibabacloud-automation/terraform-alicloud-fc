@@ -38,6 +38,7 @@ events_function_handler        = "update_events.handler"
 http_config = <<EOF
   {
     "authType": "anonymous",
+    "disableURLInternet":false,
     "methods": ["GET", "POST"]
   }
   EOF

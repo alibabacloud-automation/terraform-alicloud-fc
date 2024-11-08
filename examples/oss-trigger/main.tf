@@ -59,7 +59,7 @@ module "oss-trigger" {
   events_triggers = [
     {
       type       = "oss"
-      source_arn = "acs:oss:${data.alicloud_regions.default.regions.0.id}:${data.alicloud_account.default.id}:${alicloud_oss_bucket.default.bucket}"
+      source_arn = "acs:oss:${data.alicloud_regions.default.regions[0].id}:${data.alicloud_account.default.id}:${alicloud_oss_bucket.default.bucket}"
       config     = local.oss_trigger_conf
     },
   ]

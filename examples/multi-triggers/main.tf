@@ -48,7 +48,7 @@ module "multi-triggers" {
   events_triggers = [
     {
       type       = "mns_topic"
-      source_arn = "acs:mns:${data.alicloud_regions.default.regions.0.id}:${data.alicloud_account.default.id}:/topics/${alicloud_mns_topic.default.name}"
+      source_arn = "acs:mns:${data.alicloud_regions.default.regions[0].id}:${data.alicloud_account.default.id}:/topics/${alicloud_mns_topic.default.name}"
       config_mns = local.mns_trigger_conf
     },
     {

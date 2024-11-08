@@ -29,20 +29,26 @@ resource "alicloud_mns_topic" "default" {
 }
 
 module "vpc" {
-  source             = "alibaba/vpc/alicloud"
+  source  = "alibaba/vpc/alicloud"
+  version = "~>1.11.0"
+
   create             = true
   vpc_cidr           = "172.16.0.0/12"
   vswitch_cidrs      = ["172.16.0.0/21"]
-  availability_zones = [data.alicloud_fc_zones.default.zones.0.id]
+  availability_zones = [data.alicloud_fc_zones.default.zones[0].id]
 }
 
 module "security_group" {
-  source = "alibaba/security-group/alicloud"
+  source  = "alibaba/security-group/alicloud"
+  version = "~>2.4.0"
+
   vpc_id = module.vpc.this_vpc_id
 }
 
 module "sls" {
-  source       = "terraform-alicloud-modules/sls/alicloud"
+  source  = "terraform-alicloud-modules/sls/alicloud"
+  version = "1.2.1"
+
   project_name = "tf-example-${random_integer.default.result}"
   store_name   = "tf-example-${random_integer.default.result}"
 }
@@ -102,7 +108,7 @@ module "fc_service" {
   trigger_role        = alicloud_ram_role.default.arn
   events_triggers = [
     {
-      source_arn = "acs:mns:${data.alicloud_regions.this.regions.0.id}:${data.alicloud_account.this.id}:/topics/${alicloud_mns_topic.default.name}"
+      source_arn = "acs:mns:${data.alicloud_regions.this.regions[0].id}:${data.alicloud_account.this.id}:/topics/${alicloud_mns_topic.default.name}"
       type       = "mns_topic"
       config_mns = var.event_config
     }
