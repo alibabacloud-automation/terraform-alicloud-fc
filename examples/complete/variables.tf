@@ -51,7 +51,7 @@ variable "fc_function_http_description" {
 variable "http_function_runtime" {
   description = "The FC function runtime type."
   type        = string
-  default     = "python2.7"
+  default     = "python3.9"
 }
 
 variable "http_function_handler" {
@@ -70,7 +70,7 @@ variable "fc_function_events_description" {
 variable "events_function_runtime" {
   description = "The FC function runtime type."
   type        = string
-  default     = "python2.7"
+  default     = "python3.9"
 }
 
 variable "events_function_handler" {
@@ -99,6 +99,7 @@ variable "http_config" {
   default     = <<EOF
   {
     "authType": "anonymous",
+    "disableURLInternet":false,
     "methods": ["GET"]
   }
   EOF
@@ -111,7 +112,8 @@ variable "event_config" {
   default     = <<EOF
   {
     "filterTag":"testTag",
-    "notifyContentFormat":"STREAM"
+    "notifyContentFormat":"STREAM",
+    "notifyStrategy":"BACKOFF_RETRY"
   }
   EOF
 }

@@ -61,7 +61,7 @@ module "log-trigger" {
   events_triggers = [
     {
       type       = "log"
-      source_arn = "acs:log:${data.alicloud_regions.default.regions.0.id}:${data.alicloud_account.default.id}:project/${alicloud_log_project.default.name}"
+      source_arn = "acs:log:${data.alicloud_regions.default.regions[0].id}:${data.alicloud_account.default.id}:project/${alicloud_log_project.default.name}"
       config     = local.log_trigger_conf
     },
   ]

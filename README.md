@@ -240,63 +240,100 @@ This moudle can create FC Function and Triggers using a existing FC Service.
     ]
     ```
 
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13 |
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| <a name="provider_alicloud"></a> [alicloud](#provider\_alicloud) | n/a |
+| <a name="provider_random"></a> [random](#provider\_random) | n/a |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+|------|------|
+| [alicloud_fc_function.events](https://registry.terraform.io/providers/hashicorp/alicloud/latest/docs/resources/fc_function) | resource |
+| [alicloud_fc_function.http](https://registry.terraform.io/providers/hashicorp/alicloud/latest/docs/resources/fc_function) | resource |
+| [alicloud_fc_service.this](https://registry.terraform.io/providers/hashicorp/alicloud/latest/docs/resources/fc_service) | resource |
+| [alicloud_fc_trigger.event](https://registry.terraform.io/providers/hashicorp/alicloud/latest/docs/resources/fc_trigger) | resource |
+| [alicloud_fc_trigger.http](https://registry.terraform.io/providers/hashicorp/alicloud/latest/docs/resources/fc_trigger) | resource |
+| [random_uuid.this](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/uuid) | resource |
+| [alicloud_fc_services.this](https://registry.terraform.io/providers/hashicorp/alicloud/latest/docs/data-sources/fc_services) | data source |
+| [alicloud_ram_roles.service](https://registry.terraform.io/providers/hashicorp/alicloud/latest/docs/data-sources/ram_roles) | data source |
+| [alicloud_ram_roles.source](https://registry.terraform.io/providers/hashicorp/alicloud/latest/docs/data-sources/ram_roles) | data source |
+| [alicloud_ram_roles.trigger](https://registry.terraform.io/providers/hashicorp/alicloud/latest/docs/data-sources/ram_roles) | data source |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|:----:|:-----:|:-----:|
-| create_service | Whether to create a new FC service. Default to true. | bool | true | no |
-| filter_service_with_name_regex | A regex string to filter results by FC service name. | string | "" | no |
-| service_name | The FC service name | string | "terraform-fc-service" | no |
-| service_internet_access | Whether to allow the FC service to access Internet. Default to true. | bool | true | no |
-| service_role | RAM role arn attached to the FC service. This governs both who / what can invoke your Function, as well as what resources our Function has access to. | string | "" | no |
-| service_role_name_regex | A regex string to filter roles by name regex. | string | "" | no |
-| service_role_policy_name | A string to filter roles by policy name. | string | "" | no |
-| service_role_policy_type | A string to filter roles by policy type. | string | "" | no |
-| service_log_config | Provide this to store your FC service logs. | list | [] | no |
-| service_vpc_config | Provide this to allow your FC service to access your VPC. | list | [] | no |
-| function_memory_size | Amount of memory in MB your Function can use at runtime. Defaults to 128. Limits to [128, 3072]. | int | 128 | no |
-| function_timeout | The amount of time your Function has to run in seconds. | int | 60 | no |
-| create_http_function | Whether to create http function. | bool | false | no |
-| http_function_name | The FC http function name. | string | "terraform-fc-http-function" | no |
-| http_function_filename | The path to the function's deployment package within the local filesystem. It is conflict with the oss_-prefixed options. | string | "" | no |
-| http_function_oss_bucket | The bucket of function's deployment package within the oss service. It is conflict with the filename. | string | "" | no |
-| http_function_oss_key | The key of function's deployment package within the oss service. It is conflict with the filename. | string | "" | no |
-| http_function_runtime | The FC function runtime type. Valid values: ["nodejs6", "nodejs8", "python2.7", "python3", "php7.2", "java8"] | string | "nodejs6" | no |
-| http_function_handler | The FC function entry point in your code. | string | "index.handler" | no |
-| create_event_function | Whether to create event function. | bool | false | no |
-| events_function_name | The FC events function name. | string | "terraform-fc-events-function" | no |
-| events_function_filename | The path to the function's deployment package within the local filesystem. It is conflict with the oss_-prefixed options. | string | "" | no |
-| events_function_oss_bucket | The bucket of function's deployment package within the oss service. It is conflict with the filename. | string | "" | no |
-| events_function_oss_key | The key of function's deployment package within the oss service. It is conflict with the filename. | string | "" | no |
-| events_function_runtime | The FC function runtime type. Valid values: ["nodejs6", "nodejs8", "python2.7", "python3", "php7.2", "java8"] | string | "nodejs6" | no |
-| events_function_handler | The FC function entry point in your code. | string | "index.handler" | no |
-| trigger_role | Default RAM role arn attached to the FC trigger. Role used by the event source to call the function. The value format is \"acs:ram::$account-id:role/$role-name\". | string | "" | no |
-| trigger_source_arn | Event source resource address. | string | "" | no |
-| trigger_role_name_regex | A regex string to filter roles by name regex. | string | "" | no |
-| trigger_role_policy_name | A string to filter roles by policy name. | string | "" | no |
-| trigger_role_policy_type | A string to filter roles by policy type. | string | "" | no |
-| source_role_name_regex | A regex string to filter source roles by name regex. | string | "" | no |
-| source_role_policy_name | A string to filter source roles by policy name. | string | "" | no |
-| source_role_policy_type | A string to filter source roles by policy type. | string | "" | no |
-| http_trigger_name | The FC http trigger default name. | string | "terraform-http-trigger" | no |
-| http_triggers | List trigger fields to create http triggers | list(map(string)) | [] | no |
-| events_trigger_name | The FC events trigger default name. | string | "terraform-events-trigger" | no |
-| events_triggers | List trigger fields to create events triggers | list(map(string)) | [] | no |
+|------|-------------|------|---------|:--------:|
+| <a name="input_create_event_function"></a> [create\_event\_function](#input\_create\_event\_function) | Whether to create event function. | `bool` | `false` | no |
+| <a name="input_create_http_function"></a> [create\_http\_function](#input\_create\_http\_function) | Whether to create http function. | `bool` | `false` | no |
+| <a name="input_create_service"></a> [create\_service](#input\_create\_service) | Whether to create a new FC service. Default to true. | `bool` | `true` | no |
+| <a name="input_events_function_filename"></a> [events\_function\_filename](#input\_events\_function\_filename) | The path to the function's deployment package within the local filesystem. It is conflict with the oss\_-prefixed options. | `string` | `""` | no |
+| <a name="input_events_function_handler"></a> [events\_function\_handler](#input\_events\_function\_handler) | The FC function entry point in your code. | `string` | `""` | no |
+| <a name="input_events_function_name"></a> [events\_function\_name](#input\_events\_function\_name) | The FC events function name. | `string` | `""` | no |
+| <a name="input_events_function_oss_bucket"></a> [events\_function\_oss\_bucket](#input\_events\_function\_oss\_bucket) | The bucket of function's deployment package within the oss service. It is conflict with the filename. | `string` | `""` | no |
+| <a name="input_events_function_oss_key"></a> [events\_function\_oss\_key](#input\_events\_function\_oss\_key) | The key of function's deployment package within the oss service. It is conflict with the filename. | `string` | `""` | no |
+| <a name="input_events_function_runtime"></a> [events\_function\_runtime](#input\_events\_function\_runtime) | The FC function runtime type. | `string` | `"nodejs6"` | no |
+| <a name="input_events_trigger_name"></a> [events\_trigger\_name](#input\_events\_trigger\_name) | The FC events trigger default name. | `string` | `""` | no |
+| <a name="input_events_triggers"></a> [events\_triggers](#input\_events\_triggers) | List trigger fields to create events triggers | `list(map(string))` | `[]` | no |
+| <a name="input_fc_function_events_description"></a> [fc\_function\_events\_description](#input\_fc\_function\_events\_description) | The Function Compute function description. | `string` | `""` | no |
+| <a name="input_fc_function_http_description"></a> [fc\_function\_http\_description](#input\_fc\_function\_http\_description) | The Function Compute function description. | `string` | `""` | no |
+| <a name="input_fc_service_description"></a> [fc\_service\_description](#input\_fc\_service\_description) | The Function Compute Service description. | `string` | `""` | no |
+| <a name="input_filter_service_with_name_regex"></a> [filter\_service\_with\_name\_regex](#input\_filter\_service\_with\_name\_regex) | A regex string to filter results by FC service name. | `string` | `""` | no |
+| <a name="input_function_memory_size"></a> [function\_memory\_size](#input\_function\_memory\_size) | Amount of memory in MB your Function can use at runtime. Defaults to 128. Limits to [128, 3072]. | `number` | `128` | no |
+| <a name="input_function_timeout"></a> [function\_timeout](#input\_function\_timeout) | The amount of time your Function has to run in seconds. | `number` | `60` | no |
+| <a name="input_http_function_filename"></a> [http\_function\_filename](#input\_http\_function\_filename) | The path to the function's deployment package within the local filesystem. It is conflict with the oss\_-prefixed options. | `string` | `""` | no |
+| <a name="input_http_function_handler"></a> [http\_function\_handler](#input\_http\_function\_handler) | The FC function entry point in your code. | `string` | `""` | no |
+| <a name="input_http_function_name"></a> [http\_function\_name](#input\_http\_function\_name) | The FC http function name. | `string` | `""` | no |
+| <a name="input_http_function_oss_bucket"></a> [http\_function\_oss\_bucket](#input\_http\_function\_oss\_bucket) | The bucket of function's deployment package within the oss service. It is conflict with the filename. | `string` | `""` | no |
+| <a name="input_http_function_oss_key"></a> [http\_function\_oss\_key](#input\_http\_function\_oss\_key) | The key of function's deployment package within the oss service. It is conflict with the filename. | `string` | `""` | no |
+| <a name="input_http_function_runtime"></a> [http\_function\_runtime](#input\_http\_function\_runtime) | The FC function runtime type. | `string` | `"nodejs6"` | no |
+| <a name="input_http_trigger_name"></a> [http\_trigger\_name](#input\_http\_trigger\_name) | The FC http trigger default name. | `string` | `""` | no |
+| <a name="input_http_triggers"></a> [http\_triggers](#input\_http\_triggers) | List trigger fields to create http triggers | `list(map(string))` | `[]` | no |
+| <a name="input_service_internet_access"></a> [service\_internet\_access](#input\_service\_internet\_access) | Whether to allow the FC service to access Internet. Default to true. | `bool` | `true` | no |
+| <a name="input_service_log_config"></a> [service\_log\_config](#input\_service\_log\_config) | Provide this to store your FC service logs. | <pre>list(object({<br>    logstore = string<br>    project  = string<br>  }))</pre> | `[]` | no |
+| <a name="input_service_name"></a> [service\_name](#input\_service\_name) | The FC service name. | `string` | `""` | no |
+| <a name="input_service_role"></a> [service\_role](#input\_service\_role) | RAM role arn attached to the FC service. This governs both who / what can invoke your Function, as well as what resources our Function has access to. | `string` | `""` | no |
+| <a name="input_service_role_name_regex"></a> [service\_role\_name\_regex](#input\_service\_role\_name\_regex) | A regex string to filter roles by name regex. | `string` | `""` | no |
+| <a name="input_service_role_policy_name"></a> [service\_role\_policy\_name](#input\_service\_role\_policy\_name) | A string to filter roles by policy name. | `string` | `""` | no |
+| <a name="input_service_role_policy_type"></a> [service\_role\_policy\_type](#input\_service\_role\_policy\_type) | A string to filter roles by policy type. | `string` | `""` | no |
+| <a name="input_service_vpc_config"></a> [service\_vpc\_config](#input\_service\_vpc\_config) | Provide this to allow your FC service to access your VPC. | <pre>list(object({<br>    security_group_id = string<br>    vswitch_ids       = list(string)<br>  }))</pre> | `[]` | no |
+| <a name="input_source_role_name_regex"></a> [source\_role\_name\_regex](#input\_source\_role\_name\_regex) | A regex string to filter source roles by name regex. | `string` | `""` | no |
+| <a name="input_source_role_policy_name"></a> [source\_role\_policy\_name](#input\_source\_role\_policy\_name) | A string to filter source roles by policy name. | `string` | `""` | no |
+| <a name="input_source_role_policy_type"></a> [source\_role\_policy\_type](#input\_source\_role\_policy\_type) | A string to filter source roles by policy type. | `string` | `""` | no |
+| <a name="input_trigger_role"></a> [trigger\_role](#input\_trigger\_role) | Default RAM role arn attached to the FC trigger. Role used by the event source to call the function. The value format is "acs:ram::$account-id:role/$role-name". | `string` | `""` | no |
+| <a name="input_trigger_role_name_regex"></a> [trigger\_role\_name\_regex](#input\_trigger\_role\_name\_regex) | A regex string to filter roles by name regex. | `string` | `""` | no |
+| <a name="input_trigger_role_policy_name"></a> [trigger\_role\_policy\_name](#input\_trigger\_role\_policy\_name) | A string to filter roles by policy name. | `string` | `""` | no |
+| <a name="input_trigger_role_policy_type"></a> [trigger\_role\_policy\_type](#input\_trigger\_role\_policy\_type) | A string to filter roles by policy type. | `string` | `""` | no |
+| <a name="input_trigger_source_arn"></a> [trigger\_source\_arn](#input\_trigger\_source\_arn) | Event source resource address. | `string` | `""` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| this_service_id | The ID of the Service |
-| this_service_name | The name of the Service |
-| this_http_function_id | The ID of the http Function |
-| this_http_function_name | The name of the http Function |
-| this_http_trigger_ids | The IDs of the http Triggers |
-| this_http_trigger_names | The names of the http Triggers |
-| this_events_function_id | The ID of the events Function |
-| this_events_function_name | The name of the events Function |
-| this_events_trigger_ids | The IDs of the events Triggers |
-| this_events_trigger_names | The names of the events Triggers |
+| <a name="output_this_events_function_id"></a> [this\_events\_function\_id](#output\_this\_events\_function\_id) | The id of the events function. |
+| <a name="output_this_events_function_name"></a> [this\_events\_function\_name](#output\_this\_events\_function\_name) | The name of the events function. |
+| <a name="output_this_events_trigger_ids"></a> [this\_events\_trigger\_ids](#output\_this\_events\_trigger\_ids) | The ids of the events trigger. |
+| <a name="output_this_events_trigger_names"></a> [this\_events\_trigger\_names](#output\_this\_events\_trigger\_names) | The names of the events trigger. |
+| <a name="output_this_http_function_id"></a> [this\_http\_function\_id](#output\_this\_http\_function\_id) | The id of the http function. |
+| <a name="output_this_http_function_name"></a> [this\_http\_function\_name](#output\_this\_http\_function\_name) | The name of the http function. |
+| <a name="output_this_http_trigger_ids"></a> [this\_http\_trigger\_ids](#output\_this\_http\_trigger\_ids) | The ids of the http trigger. |
+| <a name="output_this_http_trigger_names"></a> [this\_http\_trigger\_names](#output\_this\_http\_trigger\_names) | The names of the http trigger. |
+| <a name="output_this_service_id"></a> [this\_service\_id](#output\_this\_service\_id) | The service ID. |
+| <a name="output_this_service_name"></a> [this\_service\_name](#output\_this\_service\_name) | The service name. |
+<!-- END_TF_DOCS -->
 
 ## Notes
 From the version v1.3.0, the module has removed the following `provider` setting:

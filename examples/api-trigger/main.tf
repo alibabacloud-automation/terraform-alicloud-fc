@@ -61,6 +61,7 @@ resource "alicloud_api_gateway_api" "default" {
   service_type = "FunctionCompute"
 
   fc_service_config {
+    function_type = "FCEvent"
     region        = data.alicloud_regions.default.id
     function_name = module.apigateway-trigger.this_events_function_name
     service_name  = module.apigateway-trigger.this_service_name
