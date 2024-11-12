@@ -1,3 +1,7 @@
+## 2.0.0 (November 12, 2024)
+
+- Module: remove deprecated attributes; examples: improve the examples [GH-13](https://github.com/alibabacloud-automation/terraform-alicloud-fc/pull/13)
+
 ## 1.3.1 (July 7, 2023)
 
 IMPROVEMENTS:
