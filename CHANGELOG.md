@@ -1,3 +1,8 @@
+## 2.2.0 (Unreleased)
+## 2.1.0 (December 09, 2024)
+
+- module: support bool attributes to improve data source [GH-14](https://github.com/alibabacloud-automation/terraform-alicloud-fc/pull/14)
+
 ## 2.0.0 (November 12, 2024)
 
 - Module: remove deprecated attributes; examples: improve the examples [GH-13](https://github.com/alibabacloud-automation/terraform-alicloud-fc/pull/13)
