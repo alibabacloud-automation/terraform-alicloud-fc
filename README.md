@@ -302,6 +302,9 @@ No modules.
 | <a name="input_http_function_runtime"></a> [http\_function\_runtime](#input\_http\_function\_runtime) | The FC function runtime type. | `string` | `"nodejs6"` | no |
 | <a name="input_http_trigger_name"></a> [http\_trigger\_name](#input\_http\_trigger\_name) | The FC http trigger default name. | `string` | `""` | no |
 | <a name="input_http_triggers"></a> [http\_triggers](#input\_http\_triggers) | List trigger fields to create http triggers | `list(map(string))` | `[]` | no |
+| <a name="input_query_service_role"></a> [query\_service\_role](#input\_query\_service\_role) | Whther to query service role. If you don't set 'service\_role', you can use data source to query service role. Default to false. | `bool` | `false` | no |
+| <a name="input_query_trigger_role"></a> [query\_trigger\_role](#input\_query\_trigger\_role) | Whther to query trigger role. If you don't set 'trigger\_role', you can use data source to query trigger role. Default to false. | `bool` | `false` | no |
+| <a name="input_query_trigger_source_arn"></a> [query\_trigger\_source\_arn](#input\_query\_trigger\_source\_arn) | Whther to query trigger source arn. If you don't set 'trigger\_source\_arn', you can use data source to query trigger source arn. Default to false. | `bool` | `false` | no |
 | <a name="input_service_internet_access"></a> [service\_internet\_access](#input\_service\_internet\_access) | Whether to allow the FC service to access Internet. Default to true. | `bool` | `true` | no |
 | <a name="input_service_log_config"></a> [service\_log\_config](#input\_service\_log\_config) | Provide this to store your FC service logs. | <pre>list(object({<br>    logstore = string<br>    project  = string<br>  }))</pre> | `[]` | no |
 | <a name="input_service_name"></a> [service\_name](#input\_service\_name) | The FC service name. | `string` | `""` | no |
