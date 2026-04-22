@@ -30,7 +30,7 @@ resource "alicloud_mns_topic" "default" {
 
 module "vpc" {
   source  = "alibaba/vpc/alicloud"
-  version = "~>1.11.0"
+  version = "2.0.0"
 
   create             = true
   vpc_cidr           = "172.16.0.0/12"
@@ -40,14 +40,14 @@ module "vpc" {
 
 module "security_group" {
   source  = "alibaba/security-group/alicloud"
-  version = "~>2.4.0"
+  version = "3.0.0"
 
   vpc_id = module.vpc.this_vpc_id
 }
 
 module "sls" {
   source  = "terraform-alicloud-modules/sls/alicloud"
-  version = "1.2.1"
+  version = "2.0.0"
 
   project_name = "tf-example-${random_integer.default.result}"
   store_name   = "tf-example-${random_integer.default.result}"

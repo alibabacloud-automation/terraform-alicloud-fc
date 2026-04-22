@@ -246,12 +246,13 @@ This moudle can create FC Function and Triggers using a existing FC Service.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13 |
+| <a name="requirement_alicloud"></a> [alicloud](#requirement\_alicloud) | >= 1.200.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_alicloud"></a> [alicloud](#provider\_alicloud) | n/a |
+| <a name="provider_alicloud"></a> [alicloud](#provider\_alicloud) | >= 1.200.0 |
 | <a name="provider_random"></a> [random](#provider\_random) | n/a |
 
 ## Modules
@@ -262,16 +263,16 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [alicloud_fc_function.events](https://registry.terraform.io/providers/hashicorp/alicloud/latest/docs/resources/fc_function) | resource |
-| [alicloud_fc_function.http](https://registry.terraform.io/providers/hashicorp/alicloud/latest/docs/resources/fc_function) | resource |
-| [alicloud_fc_service.this](https://registry.terraform.io/providers/hashicorp/alicloud/latest/docs/resources/fc_service) | resource |
-| [alicloud_fc_trigger.event](https://registry.terraform.io/providers/hashicorp/alicloud/latest/docs/resources/fc_trigger) | resource |
-| [alicloud_fc_trigger.http](https://registry.terraform.io/providers/hashicorp/alicloud/latest/docs/resources/fc_trigger) | resource |
+| [alicloud_fc_function.events](https://registry.terraform.io/providers/aliyun/alicloud/latest/docs/resources/fc_function) | resource |
+| [alicloud_fc_function.http](https://registry.terraform.io/providers/aliyun/alicloud/latest/docs/resources/fc_function) | resource |
+| [alicloud_fc_service.this](https://registry.terraform.io/providers/aliyun/alicloud/latest/docs/resources/fc_service) | resource |
+| [alicloud_fc_trigger.event](https://registry.terraform.io/providers/aliyun/alicloud/latest/docs/resources/fc_trigger) | resource |
+| [alicloud_fc_trigger.http](https://registry.terraform.io/providers/aliyun/alicloud/latest/docs/resources/fc_trigger) | resource |
 | [random_uuid.this](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/uuid) | resource |
-| [alicloud_fc_services.this](https://registry.terraform.io/providers/hashicorp/alicloud/latest/docs/data-sources/fc_services) | data source |
-| [alicloud_ram_roles.service](https://registry.terraform.io/providers/hashicorp/alicloud/latest/docs/data-sources/ram_roles) | data source |
-| [alicloud_ram_roles.source](https://registry.terraform.io/providers/hashicorp/alicloud/latest/docs/data-sources/ram_roles) | data source |
-| [alicloud_ram_roles.trigger](https://registry.terraform.io/providers/hashicorp/alicloud/latest/docs/data-sources/ram_roles) | data source |
+| [alicloud_fc_services.this](https://registry.terraform.io/providers/aliyun/alicloud/latest/docs/data-sources/fc_services) | data source |
+| [alicloud_ram_roles.service](https://registry.terraform.io/providers/aliyun/alicloud/latest/docs/data-sources/ram_roles) | data source |
+| [alicloud_ram_roles.source](https://registry.terraform.io/providers/aliyun/alicloud/latest/docs/data-sources/ram_roles) | data source |
+| [alicloud_ram_roles.trigger](https://registry.terraform.io/providers/aliyun/alicloud/latest/docs/data-sources/ram_roles) | data source |
 
 ## Inputs
 
@@ -306,13 +307,13 @@ No modules.
 | <a name="input_query_trigger_role"></a> [query\_trigger\_role](#input\_query\_trigger\_role) | Whther to query trigger role. If you don't set 'trigger\_role', you can use data source to query trigger role. Default to false. | `bool` | `false` | no |
 | <a name="input_query_trigger_source_arn"></a> [query\_trigger\_source\_arn](#input\_query\_trigger\_source\_arn) | Whther to query trigger source arn. If you don't set 'trigger\_source\_arn', you can use data source to query trigger source arn. Default to false. | `bool` | `false` | no |
 | <a name="input_service_internet_access"></a> [service\_internet\_access](#input\_service\_internet\_access) | Whether to allow the FC service to access Internet. Default to true. | `bool` | `true` | no |
-| <a name="input_service_log_config"></a> [service\_log\_config](#input\_service\_log\_config) | Provide this to store your FC service logs. | <pre>list(object({<br>    logstore = string<br>    project  = string<br>  }))</pre> | `[]` | no |
+| <a name="input_service_log_config"></a> [service\_log\_config](#input\_service\_log\_config) | Provide this to store your FC service logs. | <pre>list(object({<br/>    logstore = string<br/>    project  = string<br/>  }))</pre> | `[]` | no |
 | <a name="input_service_name"></a> [service\_name](#input\_service\_name) | The FC service name. | `string` | `""` | no |
 | <a name="input_service_role"></a> [service\_role](#input\_service\_role) | RAM role arn attached to the FC service. This governs both who / what can invoke your Function, as well as what resources our Function has access to. | `string` | `""` | no |
 | <a name="input_service_role_name_regex"></a> [service\_role\_name\_regex](#input\_service\_role\_name\_regex) | A regex string to filter roles by name regex. | `string` | `""` | no |
 | <a name="input_service_role_policy_name"></a> [service\_role\_policy\_name](#input\_service\_role\_policy\_name) | A string to filter roles by policy name. | `string` | `""` | no |
 | <a name="input_service_role_policy_type"></a> [service\_role\_policy\_type](#input\_service\_role\_policy\_type) | A string to filter roles by policy type. | `string` | `""` | no |
-| <a name="input_service_vpc_config"></a> [service\_vpc\_config](#input\_service\_vpc\_config) | Provide this to allow your FC service to access your VPC. | <pre>list(object({<br>    security_group_id = string<br>    vswitch_ids       = list(string)<br>  }))</pre> | `[]` | no |
+| <a name="input_service_vpc_config"></a> [service\_vpc\_config](#input\_service\_vpc\_config) | Provide this to allow your FC service to access your VPC. | <pre>list(object({<br/>    security_group_id = string<br/>    vswitch_ids       = list(string)<br/>  }))</pre> | `[]` | no |
 | <a name="input_source_role_name_regex"></a> [source\_role\_name\_regex](#input\_source\_role\_name\_regex) | A regex string to filter source roles by name regex. | `string` | `""` | no |
 | <a name="input_source_role_policy_name"></a> [source\_role\_policy\_name](#input\_source\_role\_policy\_name) | A string to filter source roles by policy name. | `string` | `""` | no |
 | <a name="input_source_role_policy_type"></a> [source\_role\_policy\_type](#input\_source\_role\_policy\_type) | A string to filter source roles by policy type. | `string` | `""` | no |
